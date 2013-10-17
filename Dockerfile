@@ -17,8 +17,8 @@ ADD conf/munin.conf /etc/munin/munin.conf
 
 # nginx
 RUN apt-get install -y nginx
-RUN rm /etc/nginx/site-enabled/default
-ADD conf/munin.nginx.conf /etc/nginx/site-enabled/munin.conf
+RUN rm /etc/nginx/sites-enabled/default
+ADD conf/munin.nginx.conf /etc/nginx/sites-enabled/munin.conf
 
 # supervisord
 RUN mkdir -p /var/log/supervisor

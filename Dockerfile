@@ -19,6 +19,7 @@ ADD conf/munin.conf /etc/munin/munin.conf
 RUN apt-get install -y nginx
 RUN rm /etc/nginx/sites-enabled/default
 ADD conf/munin.nginx.conf /etc/nginx/sites-enabled/munin.conf
+RUN service nginx restart
 
 # supervisord
 RUN mkdir -p /var/log/supervisor
@@ -27,7 +28,7 @@ RUN apt-get install -y supervisor
 # ssh
 RUN mkdir -p /var/run/sshd
 RUN apt-get install -y openssh-server
-RUN /bin/sh -c 'echo root:monit | chpasswd'
+RUN /bin/sh -c 'echo root:munin | chpasswd'
 
 # config for auto start ssh/mongod
 ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf

@@ -12,6 +12,9 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 # munin
+RUN mkdir -p /var/run/munin
+RUN chown munin:munin /var/run/munin
+RUN chmod 0755 /var/run/munin
 RUN apt-get install -y munin
 ADD conf/munin.conf /etc/munin/munin.conf
 
@@ -19,7 +22,7 @@ ADD conf/munin.conf /etc/munin/munin.conf
 RUN apt-get install -y nginx
 RUN rm /etc/nginx/sites-enabled/default
 ADD conf/munin.nginx.conf /etc/nginx/sites-enabled/munin.conf
-RUN service nginx restart
+RUN service nginx stop
 
 # supervisord
 RUN mkdir -p /var/log/supervisor

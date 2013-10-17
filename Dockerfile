@@ -12,11 +12,11 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 # munin
-RUN mkdir -p /var/run/munin
-RUN chown munin:munin /var/run/munin
-RUN chmod 0755 /var/run/munin
+RUN mkdir -p            /var/run/munin
 RUN apt-get install -y munin
 ADD conf/munin.conf /etc/munin/munin.conf
+RUN chown munin:munin   /var/run/munin
+RUN chmod 0755          /var/run/munin
 
 # nginx
 RUN apt-get install -y nginx
